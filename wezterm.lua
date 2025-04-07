@@ -15,9 +15,10 @@ config.hide_tab_bar_if_only_one_tab = true
 config.window_frame = { font_size = 13 }
 config.window_decorations = 'RESIZE'
 config.font_size = 16
+config.window_close_confirmation = 'NeverPrompt'
 config.automatically_reload_config = false
 
-config.leader = { key = 't', mods = 'CTRL' }
+config.leader = { key = 't', mods = 'CTRL', timeout_milliseconds = 5000 }
 config.keys = {
   {
     key = 'LeftArrow',
@@ -150,6 +151,20 @@ config.keys = {
     mods = 'LEADER',
     action = act.CloseCurrentPane({ confirm = true }),
   },
+  {
+    key = 'Q',
+    mods = 'LEADER',
+    action = act.CloseCurrentTab({ confirm = true }),
+  },
+  {
+    key = 'R',
+    mods = 'LEADER',
+    action = act.ReloadConfiguration,
+  },
 }
+
+wezterm.on('window-config-reloaded', function(window, pane)
+  window:toast_notification('wezterm', 'configuration reloaded!', nil, 4000)
+end)
 
 return config
