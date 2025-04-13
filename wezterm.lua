@@ -4,9 +4,9 @@ local act = wezterm.action
 local act_cb = wezterm.action_callback
 local config = wezterm.config_builder()
 
-local function is_tmux(pane)
+local function is_tmux_or_nvim(pane)
   local proc_name = string.gsub(pane:get_foreground_process_name(), '(.*[/\\])(.*)', '%2')
-  return proc_name == 'tmux'
+  return proc_name == 'tmux' or proc_name == 'nvim'
 end
 
 config.color_scheme = 'nord'
@@ -80,7 +80,7 @@ config.keys = {
     key = 'h',
     mods = 'CTRL',
     action = act_cb(function(win, pane)
-      if is_tmux(pane) then
+      if is_tmux_or_nvim(pane) then
         win:perform_action({ SendKey = { key = 'h', mods = 'CTRL' } }, pane)
       else
         win:perform_action({ ActivatePaneDirection = 'Left' }, pane)
@@ -91,7 +91,7 @@ config.keys = {
     key = 'l',
     mods = 'CTRL',
     action = act_cb(function(win, pane)
-      if is_tmux(pane) then
+      if is_tmux_or_nvim(pane) then
         win:perform_action({ SendKey = { key = 'l', mods = 'CTRL' } }, pane)
       else
         win:perform_action({ ActivatePaneDirection = 'Right' }, pane)
@@ -102,7 +102,7 @@ config.keys = {
     key = 'j',
     mods = 'CTRL',
     action = act_cb(function(win, pane)
-      if is_tmux(pane) then
+      if is_tmux_or_nvim(pane) then
         win:perform_action({ SendKey = { key = 'j', mods = 'CTRL' } }, pane)
       else
         win:perform_action({ ActivatePaneDirection = 'Down' }, pane)
@@ -114,7 +114,7 @@ config.keys = {
     key = 'k',
     mods = 'CTRL',
     action = act_cb(function(win, pane)
-      if is_tmux(pane) then
+      if is_tmux_or_nvim(pane) then
         win:perform_action({ SendKey = { key = 'k', mods = 'CTRL' } }, pane)
       else
         win:perform_action({ ActivatePaneDirection = 'Up' }, pane)
