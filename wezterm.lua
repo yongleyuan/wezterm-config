@@ -16,6 +16,8 @@ config.inactive_pane_hsb = { saturation = 0.8, brightness = 0.7 }
 config.window_frame = { font_size = 13 }
 config.window_decorations = 'RESIZE'
 config.font_size = 16
+config.initial_rows = 30
+config.initial_cols = 100
 config.window_close_confirmation = 'NeverPrompt'
 config.automatically_reload_config = false
 
